@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Quiz Dashboard</title>
+  <link rel="stylesheet" href="style.4.css" />
+</head>
+<body>
+   
+  <div class="dashboard">
+    <h1>📚 Choose a Quiz Category</h1>
+    <div class="category-grid">
+      <div class="card" onclick="startQuiz('general')">
+        <h2>🧠 General</h2>
+        <p>Test your everyday knowledge!</p>
+      </div>
+      <div class="card" onclick="startQuiz('tech')">
+        <h2>💻 Tech</h2>
+        <p>For the tech-savvy minds!</p>
+      </div>
+      <div class="card" onclick="startQuiz('science')">
+        <h2>🔬 Science</h2>
+        <p>Explore the world of science.</p>
+      </div>
+      <div class="card" onclick="startQuiz('history')">
+        <h2>📜 History</h2>
+        <p>How well do you know the past?</p>
+      </div>
+      <div class="card" onclick="startQuiz('sports')">
+        <h2>🏆 Sports</h2>
+        <p>Show your sports IQ!</p>
+      </div>
+      <div class="card" onclick="startQuiz('math')">
+        <h2>➗ Math</h2>
+        <p>Challenge your number skills!</p>
+      </div>
+    </div>
+  </div>
+
+  <script src="server.js"></script>
+  <script>
+    
+    function startQuiz(category) {
+  window.location.href = `quiz.html?category=${category}`;
+}
+
+
+   
+  
+  </script>
+</body>
+</html>

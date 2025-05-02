@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Page</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    
+
+    <div class="quiz-container" id="quiz-container"></div>
+
+    <script>
+        const questions = [
+            { question: "What is the capital of France?", options: ["Paris", "London", "Berlin", "Madrid"], answer: "Paris" },
+            { question: "Which planet is known as the Red Planet?", options: ["Earth", "Mars", "Jupiter", "Venus"], answer: "Mars" },
+            { question: "Who wrote 'Romeo and Juliet'?", options: ["Shakespeare", "Hemingway", "Dickens", "Austen"], answer: "Shakespeare" }
+        
+
+
+  
+
+        ];
+
+        let currentQuestionIndex = 0;
+        let score = 0;
+
+        function loadQuestion() {
+            const quizContainer = document.getElementById("quiz-container");
+            quizContainer.innerHTML = "";
+
+            if (currentQuestionIndex < questions.length) {
+                const currentQuestion = questions[currentQuestionIndex];
+                quizContainer.innerHTML = `
+                    <p>${currentQuestionIndex + 1}. ${currentQuestion.question}</p>
+                `;
+
+                currentQuestion.options.forEach(option => {
+                    const button = document.createElement("button");
+                    button.textContent = option;
+                    button.onclick = () => checkAnswer(option);
+                    quizContainer.appendChild(button);
+                });
+            } else {
+                showResult();
+            }
+        }
+
+        function checkAnswer(selectedOption) {
+            if (selectedOption === questions[currentQuestionIndex].answer) {
+                score++;
+            }
+            currentQuestionIndex++;
+            loadQuestion();
+        }
+
+        function showResult() {
+            const quizContainer = document.getElementById("quiz-container");
+            quizContainer.innerHTML = `
+                <h2>Quiz Completed!</h2>
+                <p>Your Score: ${score}/${questions.length}</p>
+                <button onclick="window.location.href='dashbord.html'">Take Another Quiz</button>
+            `;
+
+            // Send score to backend
+            fetch('http://localhost:3000/submit', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ name: 'User', score: score })
+            });
+        }
+
+        loadQuestion();
+    </script>
+    
+    <script src="script.js"></script>
+</body>
+</html>
+
+
